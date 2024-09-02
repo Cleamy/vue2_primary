@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+  
+</head>
+<body>
+    <div id="root">
+        <h1>{{msg}}</h1>
+        <!--  组件标签 -->
+        <school></school>
+        <hello></hello>
+        <hr>
+        <student></student>
+    </div>
+</body>
+<script text="type/javascript">
+    Vue.config.devtools = true
+    // 全局注册组件
+
+
+    // 创建组件
+    const hello = Vue.extend({
+        template:`<div> {{name}} </div>`,
+        data(){
+            return{
+                name:'hello'
+            }
+        }
+    })
+    const school = Vue.extend({
+        template:`
+        <div>
+            <h1>学校：{{name}}</h1>
+            <h1>地址{{address}}</h1>
+        </div>
+        `,
+        data(){
+            return {
+                name : 'gdpi',
+                address: '中山',
+            }
+        }
+    })
+    const student = Vue.extend({
+        template:`
+        <div>
+            <h2>学生：{{studentname}}</h2>
+            <h2>年龄：{{age}}</h2>
+        </div>
+        `,
+        data(){
+            return {
+                studentname:'cleamy',
+                age:21,
+            }
+        }
+    })
+    Vue.component('hello',hello)
+    // 组件注册
+    new Vue({
+        el:'#root',
+        data:{
+            msg:'组件'
+        },
+        // 注册
+        components:{
+            school: school,
+            student:student,
+        },
+    })
+</script>
+</html>

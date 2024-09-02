@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    
+</head>
+<body>
+    <div id="root">
+        <h1>内置关系</h1>
+    </div>
+</body>
+<script text="type/javascript">
+    Vue.config.devtools = true
+
+    function Demo(){
+        this.a = 1
+        this.b = 2
+
+    }
+
+    const demo = new Demo()
+    
+    console.log(Demo.prototype)// 显示原型属性
+    console.log(demo.__proto__)// 隐式原型属性
+    Demo.prototype.x = 3
+    console.log(demo.x)
+    console.log(demo)
+    const school =  Vue.extend({
+        template:`<div>
+                {{name}}
+            </div>`,
+        data(){
+            return {
+                name:'school name'
+            }
+        }
+    })
+    console.log(school.prototype.__proto__ == Vue.prototype)
+    var vm = new Vue({
+        template:``,
+        el:"#root",
+        data:{
+
+        },
+        components:{
+            school
+        }
+    })
+</script>
+</html>

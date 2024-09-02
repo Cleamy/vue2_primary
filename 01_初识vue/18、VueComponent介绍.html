@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+  
+</head>
+<body>
+    <div id="root">
+        <school></school>
+    </div>
+</body>
+<script text="type/javascript">
+    Vue.config.devtools = true
+    
+     // 方法1 
+     const s = Vue.extend({
+        name:'sn',
+        template:`<div>{{sname}}
+            <h2>{{sname}}</h2>
+            <button @click='showName'>点击显示学校</button>
+            </div>
+        `,
+       data(){
+            return{
+                sname:'sname',
+                sid:'sid',
+            }
+        },
+        methods: {
+            showName(){
+                // 此时的 this 为 vueComponent 实力对象
+                console.log('showName',this)
+            }
+        }
+    })
+    
+    console.log(s)
+    var vm = new Vue({
+        template:``,
+        el:'#root',
+        data:{
+
+        },
+        components:{
+            school:s
+        }
+    })
+</script>
+</html>

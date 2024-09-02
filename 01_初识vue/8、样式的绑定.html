@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <style>
+        .basic{
+            width: 400px;
+            height:100px;
+            border:1px solid black;
+
+        }
+        .atguigu1 {
+            background-color:red;
+        }
+        .atguigu2{
+            width:100px;
+            background-color: skyblue;
+        }
+        .happy{
+            background-color: aliceblue;
+        }
+        .sad{
+            background-color: antiquewhite;
+        }
+        .normal{
+            background-color: azure;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <!-- 绑定class样式，
+            字符串写法：适用于：样式的类名不确定需要动态指定 
+        -->
+        <div class="basic" :class="a" @click="changeMood">{{name}}</div>
+        <!-- 
+            绑定class样式、数组写法、适用于：要绑定样式个数不确定、名字也不确定
+        -->
+        <div class="basic" :class="classArr" @click="changeMood">{{name}}</div>
+        <!-- 
+            绑定class样式--对象写法，适用于、绑定个数、名字确定的、但是要动态确定用不用
+        -->
+        <div class="basic" :class="classArr" @click="classObj">{{name}}</div>
+
+        <!-- 绑定style样式 -->
+        <div class="basic" :style="{fontSize:fsize}" @click="classObj">{{name}}</div>
+     </div>
+</body>
+<script type="text/javascript">
+    Vue.config.devtools = true
+    new Vue({
+        el:"#root",
+        data:{
+            name:"test",
+            a:"atguigu1",
+            classArr:['sad','happy','normal'],
+            classObj:{
+                sad:false,
+                happy:false,
+            },
+            fsize:"40px",
+            styleObj:{
+                backgroundColor:"orange",
+                fontSize:"40px",
+                color:"red"
+            }
+        },
+        methods:{
+            changeMood(){
+               const arr = ['happy','sad','normal']
+               /* 向下取整 */
+               const index = Math.floor(Math.random()*3)
+               console.log(index)
+               this.a=arr[index]
+            }
+        }
+    })
+</script>
+</html>

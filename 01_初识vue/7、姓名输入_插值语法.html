@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        first name <input type="text" v-model="firstName" id="">
+        last name <input type="text" v-model="lastName" id="">
+        name <span>{{fullName}}</span>
+    </div>
+</body>
+<script>
+    Vue.config.devtools = true;
+    new new Vue({
+        el:"#root",
+        data:{
+            firstName:"张",
+            lastName:"三",
+            number:{
+                b:1,
+                e:3,
+            }
+        },
+        computed: {
+            info() {
+                return this.firstName
+            }
+        },
+        methods: {
+            changeWeather() {
+                this.hot = !this.host
+            }
+        },
+        //监听属性
+        /* 默认不检测watch内部值的改变、
+            将 deep 改为 true 则回 检测内部
+        */
+        watch:{
+            info:{
+                deep:true,
+                immediate :true,    
+                handler(newValue,odlValue){
+
+                }
+            }
+        }
+       /*  computed: {
+            fullName: {
+                get(){
+                    return this.firstName + "-" + this.lastName
+                },
+                set(value) {
+                    console.log("set",value)
+                    const arr = value.split("-")
+                    this.firstName = arr[0]
+                    this.lastName = arr[1]
+
+                }
+            }
+        } */
+        
+    })
+</script>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+
+</head>
+
+    <body>
+        <div id="root">
+            <h3>当前时间为{{time}}</h3>
+            <h3>当前时间为{{time}}</h3>
+            <h3>当前时间为{{time | timeFormater}}</h3>
+            <h3>当前时间为{{time | timeFormater("YYYY-MM-DD") | mySlince }}</h3>
+        </div>
+
+        <div id="root2">
+            <h2>{{message}}</h2>
+        </div>
+    </body>
+    <script type="text/javascript">
+      
+        Vue.config.devtools = true
+        //全局过滤器
+       
+        Vue.filters('myslice',function(value){
+            return value.slice(0,4)
+        })
+
+        /* function showInfo() {
+            // alert("你好呀朋友")s
+        } */
+        new Vue({
+            el:"#root",
+            data:{
+                time:1725086294547
+            },// 计数器
+            computed:{
+                ftmTime(){
+                    return dayjs(this.time).format("YYYY-MM-DD HH:mm:ss")
+                }
+            },// 使用方法
+            methods:{
+                getTime(){
+                    return dayjs(this.time).format("YYYY-MM-DD HH:mm:ss")
+                }
+            },// 过滤器使用
+            // 局部过滤器
+            filters:{
+                timeFormater(value,ftm='YYYY-MM-DD HH:mm:ss'){
+                    console.log('@',value)
+                    return '过滤器，时间戳转化为格式化时间'+ftm
+                },
+                mySlince(value) {
+                    return value+"  mySlince"
+                }
+            }
+            
+        })
+        new Vue({
+            el:"#root2",
+            data:{
+                message:'test'
+            }
+        })
+    </script>
+</html>

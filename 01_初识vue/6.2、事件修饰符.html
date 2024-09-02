@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+</head>
+<style>
+    .demo1 {
+        height:50px;
+        background-color: skyblue;
+    }
+    .box1{
+        padding: 5px;
+        background-color: skyblue;
+    }
+    .box2{
+        padding: 5px;
+        background-color: orange;
+    }
+    .list {
+        width: 200px;
+        height: 200px;
+        background-color: peru;
+        overflow: auto;/* 滚动条 */
+    }
+    li{
+        height: 100px;
+    }
+</style>
+<body>
+    <div id="root">
+        <h2>欢迎来到{{name}}学习 </h2>
+        <!-- prevent 阻止默认事件 事件修饰符 -->
+        <a :href="url" @click.prevent="showInfo2(45,$event)">点击提示2</a>
+        <!-- 阻止事件冒泡 （常用）-->
+         <!-- <div>
+            <button @click="showInfo"></button>
+         </div> -->
+         <!-- 
+            vue 中 的 事件修饰符
+                1.prevent：阻止事件默认事件（常用）
+                2.stop 阻止事件冒泡（常用）
+                3.once 事件只触发一次（常用）
+                4.capture 使用事件的捕获模式
+                5.self 只有event.target 是 当前操作的元素是才触发事件
+                6.passive 事件的默认行为立即执行，无需等待事件回调执行完毕
+         
+         
+         -->
+         <!--  事件冒泡 -->
+        <div class="demo1" @click="showInfo1">
+            <button v-on:click="showInfo1">点击提示1</button>
+            <button @click.stop="showInfo2(45,$event)">点击提示2</button>
+        </div>
+        <div class="box1" @click="showInfo1">
+            div1
+            <div class="box2" @click="showInfo2(45,$event)">
+                div2
+            </div>
+        </div>
+        <div class="demo3" @click.self="showInfo1">
+            <button class="showInfo1"></button>
+        </div>
+        <!-- passive 时间默认行为立即执行，无序等待 -->
+         <!-- scroll 是鼠标滚动
+                wheel 滚轮滚动 
+         -->
+        <ul @wheel.passive="demo" class="list">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+    </div>  
+</body>
+<script type="text/javascript">
+    Vue.config.devtools = true
+    /* function showInfo() {
+        // alert("你好呀朋友")s
+    } */
+    new Vue({
+        el:"#root",
+        data:{
+            url:"http://www.baidu.com",
+            name:"cleamy"
+        },
+        methods:{
+            showInfo1(){
+                alert("你好呀!!")
+                console.log(event.target)
+            },
+            showInfo2(number,event){
+                alert("你好呀!")
+                console.log(event.target)
+            },
+            demo(){
+                console.log("累了")
+            },
+        }
+        
+    })
+</script>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+  
+</head>
+<body>
+    <div id="root">
+        <h1> 自定义指令，v-big</h1>
+        <h2>当前N的值<span v-text="n"></span></h2>
+            <h2>放大N的值<span v-bigf="n"></span></h2>
+            <h2>放大N的值<span v-big="n"></span></h2>
+        <button @click="n++">{{n}}+1</button>
+        <h1> v-fbind</h1>
+        <br>
+        <!-- 自定义指令 使用多个单词 vue 需要加‘’ -->
+        <input type="text" v-fbind-model:value="n" autofocus>
+    </div>
+</body>
+<script text="type/javascript">
+    Vue.config.devtools = true
+    Vue.directive('demo',{
+        bind(element,binding){
+                    console.log('bind')
+                    element.value = binding.value
+
+                },
+                inserted(element,binding){
+                    console.log("inserted")
+                    element.value = binding.value
+                    // 自动焦点
+                    element.focus()
+                },
+                update(element,binding){
+                    element.value = binding.value
+                    console.log('update')
+                },
+    })
+    Vue.directive('demo2',function(element,binding){
+        
+        console.log('bind')
+        element.value = binding.value
+    })
+    new Vue({
+        el: '#root',
+        data: {
+            n:1,
+            name: 'cleamy',
+            text: '<h2>v-text </h2>',
+            str2: '<a href=javascript:location.href="https//www.baidu.com">testfirst</a>',
+
+        },
+        directives:{
+            big(element,binding){
+                element.innerText = binding.value * 10
+                console.log(element,binding)
+            },
+            'fbind-model': {
+                
+                bind(element,binding){
+                    console.log('bind')
+                    element.value = binding.value
+
+                },
+                inserted(element,binding){
+                    console.log("inserted")
+                    element.value = binding.value
+                    // 自动焦点
+                    element.focus()
+                },
+                update(element,binding){
+                    element.value = binding.value
+                    console.log('update')
+                },
+            }
+        }
+    })
+
+</script>
+</html>

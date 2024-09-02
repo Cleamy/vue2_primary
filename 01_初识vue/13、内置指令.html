@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <!-- v-text 将其内容作为文本String -->
+        <h2>v-text </h2>
+        <span v-text="name">hi</span>
+        <span v-text="text">hi</span>
+        <!-- v-html 将文本作为按照html进行插入 -->
+        <h2>v-html</h2>
+        <span v-html="name">hi</span>
+        <span v-html="text">hi</span>
+        <span v-html="str2">hi</span>
+        <!-- 这个指令可以隐藏未编译的 Mustache 标签直到实例准备完毕。 -->
+        <h2>v-cloak</h2>
+        <span v-cloak>hi</span>
+        <!-- v-once  ，元素/组件及其所有的子节点将被视为静态内容并跳过-->
+         <h2>v-once</h2>
+         <span v-once>{{n}}</span>
+         <span >{{n}}</span>
+         <button @click="n++">n+1</button>
+         <!-- v-pre 可用让vue掉过该节点的解析，显示原样-->
+        <h2 v-pre>v-pre</h2>
+
+         <span v-pre>{{n}}</span>
+         <button @click="n++">n+1</button>
+    </div>
+</body>
+<script text="type/javascript">
+    Vue.config.devtools = true
+    new Vue({
+        el: '#root',
+        data: {
+            n:1,
+            name: 'cleamy',
+            text: '<h2>v-text </h2>',
+            str2: '<a href=javascript:location.href="https//www.baidu.com">testfirst</a>',
+
+        }
+    })
+
+</script>
+</html>

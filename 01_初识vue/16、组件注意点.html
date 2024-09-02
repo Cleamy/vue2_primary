@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+  
+</head>
+<body>
+    <div id="root">
+        <xue-xiao></xue-xiao>
+        <xue-xiaos></xue-xiaos>
+    </div>
+</body>
+<script text="type/javascript">
+    Vue.config.devtools = true
+    
+    // 方法1 
+    const s = Vue.extend({
+        name:'sn',
+        template:`<div>{{sname}}</div>
+        `,
+       data(){
+            return{
+                sname:'sname',
+                sid:'sid',
+            }
+        }
+    })
+    // 方法2
+    const ss = {
+        name:'ss',
+        template:`<div>{{sname}}</div>
+        `,
+       data(){
+            return{
+                sname:'ssname',
+                sid:'sid',
+            }
+        }
+    }
+
+
+
+    new Vue({
+        el:'#root',
+        data:{
+            sname:'name1'
+        },
+        components:{
+            'xue-xiao':s,
+            'xue-xiaos':ss,
+        }
+    })
+</script>
+</html>

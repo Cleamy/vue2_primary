@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <ul>
+            <li v-for="(p, index) in persons" :key="index"   >
+                {{p.name}}-{{p.age}}
+            </li>
+        </ul>
+        <button @click="add">添加</button>
+        <ul>
+            <li v-for="(p, index) in person" :key="index"   >
+                {{p.name}}-{{p.age}}
+            </li>
+        </ul>
+    </div>
+</body>
+<script type="text/javascript">
+    Vue.config.devtools = true;
+    
+    const vm = new Vue({
+        el:"#root",
+        data:{
+            persons:[
+                {id:"001",name:"三个",age:10},
+                {id:"002",name:"个",age:30},
+                {id:"003",name:"三",age:40},
+            ],
+            car:{
+                name:"ader",
+                price:"30w",
+                color:"blue",
+            }
+        },
+        methods:{
+            add(){
+                const p = {id:"004",name:"wie",age:50}
+                this.persons.unshift(p)
+            }
+        }
+      
+    })
+</script>
+</html>

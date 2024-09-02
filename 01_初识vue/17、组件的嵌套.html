@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    
+</head>
+<body>
+    <div id="root">
+        <city></city>
+    </div>    
+</body>
+<script text="type/javascript">
+    Vue.config.devtools = true
+
+
+    const ss = Vue.extend({
+        name:"ss",
+        template:`<div>
+            {{schoolname}}
+            </div>`,
+        data(){
+            return {
+                schoolname:'schoolname12'
+            }
+        }
+    })
+
+    const st = Vue.extend({
+        name:"st",
+        template:`<div>
+            {{studentname}}
+            {{studentage}}
+            </div>`,
+        data(){
+            return {
+                studentname:'studentname1',
+                studentage:21
+            }
+        }
+    })
+
+
+    // 嵌套组件
+    const cy = Vue.extend({
+        name:'city',
+        template:`
+        <div>{{cityname}}{{citycode}}<br>
+            <school></school><br>
+            <student></student>
+            </div>`,
+        data(){
+            return{
+                cityname:'cityname1',
+                citycode:'citycode1',
+            }
+        },
+        components:{
+            school:ss,
+            student:st,
+            
+        }
+    })
+
+    // app 组件
+    const app = Vue.extend({
+        template:`<div>
+                <city></city>
+                <student></student>
+            </div>`,
+        components:{
+            city:cy,
+            student:st,
+        }
+    })
+    new Vue({
+        template:`<app></app>`,
+        el:'#root',
+        data:{
+
+        },
+        components:{
+            app
+        }
+    })
+
+
+
+</script>
+</html>

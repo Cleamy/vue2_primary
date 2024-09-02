@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do cument</title>
+    <!-- 引入 vue -->
+    <!-- <script type="text/javascript" src="../js/vue.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>插值语法</h1>
+        <hr>
+        <h1>hello {{name.toUpperCase()}},{{address}}</h1>
+        <h1>指令语法</h1>
+        <hr>
+        <a v-bind:href="url">qu</a>
+        <a :href="url">qu</a>
+    </div>
+    
+</body>
+<script type="text/javascript">
+    Vue.config.devtools = true;
+    // 创建Vue 创建
+    new Vue({
+        el:"#root", // el 用于制定当前Vue实力位那个容器服务，随着css选择器字符串
+        data: {
+            name: "cleamy",
+            address:"st",
+            url: "http://www.atguigu.com",
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <input type="text" v-model="searchInfo" placeholder="请输入用户信息">
+        <ul>
+            <li v-for="(p, index) in filPersons" :key="p.id"   >
+                {{p.name}}-{{p.age}}-{{p.sex}}
+            </li>
+        </ul>
+        <button @click="sortType = 2">升序</button>
+        <button @click="sortType = 1">降序</button>
+        <button @click="sortType = 0">原序</button>
+    </div>
+</body>
+<script type="text/javascript">
+    Vue.config.devtools = true;
+    
+    const vm = new Vue({
+        el:"#root",
+        data:{
+            sortType:0,
+            persons:[
+                {id:"001",name:"我你",sex:"女",age:3},
+                {id:"002",name:"你",sex:"她",age:2},
+                {id:"003",name:"她",sex:"男",age:4},
+            ],
+            car:{
+                name:"ader",
+                price:"30w",
+                color:"blue",
+            },
+            searchInfo:'',
+        },
+        computed:{
+            filPersons(){
+               const arr = this.persons.filter((p)=>{
+                    return p.name.indexOf(this.searchInfo) !== -1
+               })
+               // 判断一下是否需要排序
+               if(this.sortType) {
+                    arr.sort((p1,p2)=>{
+                        // 函数体
+                        return this.sortType == 1 ? p2.age-p1.age : p1.age-p2.age
+                    })
+               }
+               return arr
+            } 
+        }
+        /* watch:{
+            searchInfo: {
+                immediate:true,
+                handler(val){
+                    
+                console.log("search修改")
+                this.filPersons = this.persons.filter((p)=>{
+                    return p.name.indexOf(val) != -1
+                })
+                }
+            } 
+        } */
+      
+    })
+</script>
+</html>
